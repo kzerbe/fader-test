@@ -27,9 +27,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              {
+                "input": "./custom/bootstrap4/scss/bootstrap.scss"
+              },
+              "src/styles.scss",
+              "./node_modules/font-awesome/css/font-awesome.css",
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./custom/bootstrap4/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {

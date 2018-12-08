@@ -1,0 +1,27 @@
+$lawo_cyan: #5ba6e4;
+$lawo_pink: #be006b;
+$lawo_blau: #00a7e7; // #0077aa;
+$lawo_dunkelgrau: #393938; // 3c3c3b;
+$lawo_mittelgrau: #6e6e6e;
+$lawo_hellgrau: #e2e2e2;
+$white: white;
+$dark: #202020;
+
+$body-bg: black;
+$body-color: white;
+$primary: $lawo_blau;
+$secondary: $lawo_mittelgrau;
+$component-active-bg: $lawo_blau;
+
+$enable-rounded: false;
+$enable-shadows: false;
+$font-weight-normal: 440;
+$card-bg: $lawo_dunkelgrau;
+$card-border-color: $dark;
+$card-cap-bg: $lawo_mittelgrau;
+$nav-tabs-border-color: $lawo_hellgrau;
+
+$navbar-dark-color: $lawo_cyan;
+$navbar-dark-hover-color: $lawo_blau;
+$navbar-dark-active-color: $white;
+$navbar-dark-disabled-color: $secondary;
