@@ -1,6 +1,6 @@
-import {AfterViewChecked, Component} from '@angular/core';
+import {AfterViewChecked, Component, OnDestroy} from '@angular/core';
 import {Fader, FaderService} from '../../services/fader_service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 enum InitState {
   preInit, initNodes, ready
@@ -11,14 +11,14 @@ enum InitState {
   templateUrl: 'canvas-fader.component.html',
   styles: ['.pads {padding: 0 4px 0 4px;}']
 })
-export class CanvasFaderComponent implements AfterViewChecked {
+export class CanvasFaderComponent implements AfterViewChecked, OnDestroy {
   state: InitState = InitState.preInit;
   contexts = {};
   colWidth: number;
   resized = false;
-  faders$: Observable<Fader[]>;
-  can1: any;
   faderCount = 0;
+  faders$: Observable<Fader[]>;
+  subscription: Subscription;
 
   constructor(private faderService: FaderService) {
     this.faders$ = faderService.faders$;
@@ -29,7 +29,7 @@ export class CanvasFaderComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.faders$.subscribe(faders => {
+    this.subscription = this.faders$.subscribe(faders => {
       if (faders.length !== this.faderCount) {
         this.contexts = {};
         this.faderCount = faders.length;
@@ -72,5 +72,11 @@ export class CanvasFaderComponent implements AfterViewChecked {
         this.resized = false;
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
