@@ -5,7 +5,9 @@
     "ng": "ng",
     "serve": "node fader-testserver.js",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
+    "build-image": "bash docker-build.sh",
+    "container": "bash docker-run.sh",
     "lint": "ng lint"
   },
   "private": true,
