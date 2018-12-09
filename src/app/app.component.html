@@ -11,6 +11,22 @@
       </ul>
     </div>
   </nav>
+  <div class="form-row">
+    <div class="col-2">
+      <label>Faders
+        <input type="number" class="form-control" [(ngModel)]="faderCount">
+      </label>
+    </div>
+    <div class="col-2">
+      <label>Samples/min
+        <input type="number" class="form-control" [(ngModel)]="sampleRate">
+      </label>
+    </div>
+    <div class="btn-group pads">
+      <button class="btn btn-primary" (click)="onStop()"><i class="fa fa-stop"></i></button>
+      <button class="btn btn-primary" (click)="onStart()"><i class="fa fa-play"></i></button>
+    </div>
+  </div>
   <div class="card">
     <div class="card-body">
       <router-outlet></router-outlet>

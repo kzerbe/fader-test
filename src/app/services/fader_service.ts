@@ -1,8 +1,8 @@
 
 import {Injectable} from '@angular/core';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
-export const FaderCount = 120;
+const FaderCount = 120;
 
 export class Fader {
   id: number;
@@ -36,23 +36,42 @@ export class Fader {
 @Injectable()
 export class FaderService {
   faders: Fader[] = [];
+  timer = 0;
+  subject = new Subject<Fader[]>();
 
   constructor() {
-    for (let count = 1; count < FaderCount + 1; count++) {
+  }
+
+  init(faderCount = FaderCount) {
+    this.faders = [];
+
+    for (let count = 1; count < faderCount + 1; count++) {
       this.faders.push(new Fader(count));
     }
   }
 
-  faders$(): Observable<Fader[]> {
-    let subject = new BehaviorSubject(this.faders);
-    setInterval(() => {
+  start(sampleRate: number): Observable<Fader[]> {
+    this.stop();
+    this.timer = setInterval(() => {
       for (let fader of this.faders) {
         fader.value = Math.round(100 * Math.random());
       }
-      subject.next(this.faders);
-    }, 50);
 
-    return subject;
+      this.subject.next(this.faders);
+    }, 60000 / sampleRate);
+
+    return this.subject;
+  }
+
+  stop() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = 0;
+    }
+  }
+
+  get faders$(): Observable<Fader[]> {
+    return this.subject;
   }
 
 }

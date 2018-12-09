@@ -7,7 +7,7 @@ import {FaderService} from '../../services/fader_service';
   styles: ['.pads {padding: 4px;}']
 })
 export class CssFaderComponent {
-  faders$ = this.faderService.faders$();
+  faders$ = this.faderService.faders$;
 
   constructor(private faderService: FaderService) {
   }

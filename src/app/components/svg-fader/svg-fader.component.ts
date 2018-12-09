@@ -7,7 +7,7 @@ import {FaderService} from '../../services/fader_service';
   styles: ['.pads {padding: 0 4px 0 4px;}']
 })
 export class SvgFaderComponent {
-  faders$ = this.faderService.faders$();
+  faders$ = this.faderService.faders$;
 
   constructor(private faderService: FaderService) {
   }
