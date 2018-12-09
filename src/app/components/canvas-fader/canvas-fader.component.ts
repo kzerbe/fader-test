@@ -29,6 +29,9 @@ export class CanvasFaderComponent implements AfterViewChecked, OnDestroy {
   }
 
   ngAfterViewChecked() {
+    if (this.subscription) {
+      return;
+    }
     this.subscription = this.faders$.subscribe(faders => {
       if (faders.length !== this.faderCount) {
         this.contexts = {};
