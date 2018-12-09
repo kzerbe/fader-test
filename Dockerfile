@@ -5,4 +5,4 @@ USER node
 RUN npm install --quiet
 COPY . .
 EXPOSE 3000
-RUN npm run serve
+CMD ['npm','run','serve']
