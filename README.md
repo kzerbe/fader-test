@@ -11,6 +11,10 @@ performance and resource limits on different browsers and mobile devices.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 Screen layout is done with Twitter Bootstrap 4.
 
+## Demo installation
+
+An installed release of the app is accessible at http://zerbe.cloud:3000/
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
