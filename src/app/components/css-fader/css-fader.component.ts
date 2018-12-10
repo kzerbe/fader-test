@@ -4,7 +4,7 @@ import {FaderService} from '../../services/fader_service';
 @Component({
   selector: 'css-fader',
   templateUrl: 'css-fader.component.html',
-  styles: ['.pads {padding: 4px;}']
+  styleUrls: ['css-fader.component.scss']
 })
 export class CssFaderComponent {
   faders$ = this.faderService.faders$;
