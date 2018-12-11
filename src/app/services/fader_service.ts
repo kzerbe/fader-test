@@ -52,7 +52,7 @@ export class FaderService {
 
   start(sampleRate: number): Observable<Fader[]> {
     this.stop();
-    this.timer = setInterval(() => {
+    this.timer = window.setInterval(() => {
       for (let fader of this.faders) {
         fader.value = Math.round(100 * Math.random());
       }
