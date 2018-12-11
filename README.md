@@ -13,7 +13,7 @@ Screen layout is done with Twitter Bootstrap 4.
 
 ## Demo installation
 
-An installed release of the app is accessible at http://zerbe.cloud:3000/
+An installed release of the app is accessible at https://fader-test.zerbe.cloud/
 
 ## Development server
 
