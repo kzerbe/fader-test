@@ -11,6 +11,10 @@ performance and resource limits on different browsers and mobile devices.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 Screen layout is done with Twitter Bootstrap 4.
 
+## NEW Branch "reactive"
+Besides the "main" branch a new branch "reactive" is using observable streams 
+to build and stream fader data (avoiding legacy JS code).
+
 ## Demo installation
 
 An installed release of the app is accessible at https://fader-test.zerbe.cloud/
