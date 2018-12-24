@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {FaderService} from '../../services/fader_service';
+import {Fader, FaderData, FaderService} from '../../services/fader_service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'svg-fader',
@@ -7,8 +8,18 @@ import {FaderService} from '../../services/fader_service';
   styles: ['.pads {padding: 0 4px 0 4px;}']
 })
 export class SvgFaderComponent {
-  faders$ = this.faderService.faders$;
+  faders: Fader[] = [];
+  needResubscribe: Observable<FaderData>;
 
   constructor(private faderService: FaderService) {
+    this.needResubscribe = this.faderService.subscribe(faderService.samples$.subscribe(faders => {
+      this.faders = faders;
+    }));
+
+    this.needResubscribe.subscribe(() => {
+      this.faderService.subscribe(faderService.samples$.subscribe(faders => {
+        this.faders = faders;
+      }));
+    })
   }
 }

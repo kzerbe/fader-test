@@ -21,7 +21,7 @@ export class CanvasFaderComponent implements AfterViewChecked, OnDestroy {
   subscription: Subscription;
 
   constructor(private faderService: FaderService) {
-    this.faders$ = faderService.faders$;
+    // this.faders$ = faderService.faders$;
   }
 
   onResize(event: Event) {

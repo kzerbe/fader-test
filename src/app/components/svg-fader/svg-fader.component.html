@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <div class="row no-gutters">
-      <div class="col-md-1 pads" *ngFor="let fader of faders$ | async">
+      <div class="col-md-1 pads" *ngFor="let fader of faders">
         <span class="text-nowrap">{{fader.caption}}</span>
         <svg width="100%" height="16px" class="no-gutters">
           <rect [attr.width]="fader.value$" height="16px" style="fill: #00a7e7;" />

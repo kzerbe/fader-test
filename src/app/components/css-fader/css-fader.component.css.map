@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,OAAO,EAAE,GAAG;;AAGd,aAAc;EACZ,mBAAmB,EAAE,EAAE",
+"sources": ["css-fader.component.scss"],
+"names": [],
+"file": "css-fader.component.css"
+}

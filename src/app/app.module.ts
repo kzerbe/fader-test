@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SvgFaderComponent} from './components/svg-fader/svg-fader.component';
 import {CssFaderComponent} from './components/css-fader/css-fader.component';
-import {CanvasFaderComponent} from './components/canvas-fader/canvas-fader.component';
 import {FaderService} from './services/fader_service';
 
 @NgModule({
@@ -14,7 +13,6 @@ import {FaderService} from './services/fader_service';
     AppComponent,
     CssFaderComponent,
     SvgFaderComponent,
-    CanvasFaderComponent
   ],
   imports: [
     BrowserModule,

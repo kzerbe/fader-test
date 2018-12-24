@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {FaderService} from './services/fader_service';
 
 @Component({
@@ -9,22 +9,21 @@ import {FaderService} from './services/fader_service';
 export class AppComponent implements AfterViewInit {
   faderCount = 120;
   sampleRate = 1200;
-  lastFaderCount = 0;
 
   constructor(private faderService: FaderService) {
   }
 
   ngAfterViewInit() {
-    if (this.faderCount !== this.lastFaderCount) {
-      this.faderService.init(this.faderCount);
-      this.lastFaderCount = this.faderCount;
+    if (this.faderCount !== this.faderService.faderCount) {
+      this.faderService.faderCount = this.faderCount;
     }
-
-    this.faderService.start(this.sampleRate);
+    if (this.sampleRate !== this.faderService.sampleRate) {
+      this.faderService.sampleRate = this.sampleRate;
+    }
   }
 
   onStop() {
-    this.faderService.stop();
+    this.faderService.unsubscribe();
   }
 
   onStart() {

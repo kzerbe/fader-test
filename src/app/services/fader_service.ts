@@ -1,18 +1,20 @@
 
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Observable, interval, range, Subscription, Subject} from 'rxjs';
+import {mergeMapTo, map, toArray} from 'rxjs/operators';
 
 const FaderCount = 120;
+const SampleRate = 1200;
 
 export class Fader {
   id: number;
   caption: string;
   value: number;
 
-  constructor(id: number) {
+  constructor(id: number, value = 0) {
     this.id = id;
     this.caption = `Ch ${id}`;
-    this.value = 0;
+    this.value = value;
   }
 
   get id$() {
@@ -30,48 +32,56 @@ export class Fader {
   get color(): string {
     return this.value > 90 ? 'red' : '#00a7e7';
   }
+}
 
+export interface FaderData {
+  count: number;
+  rate: number;
 }
 
 @Injectable()
 export class FaderService {
-  faders: Fader[] = [];
-  timer = 0;
-  subject = new Subject<Fader[]>();
+  private _faderCount = FaderCount;
+  private _sampleRate = SampleRate;
+  subscribed: Subscription[] = [];
+  needResubscribe$ = new Subject<FaderData>();
 
-  constructor() {
+  set faderCount(faderCount: number) {
+    this._faderCount = faderCount;
+    this.resubscribe();
   }
 
-  init(faderCount = FaderCount) {
-    this.faders = [];
+  set sampleRate(sampleRate: number) {
+    this._sampleRate = sampleRate;
+    this.resubscribe();
+  }
 
-    for (let count = 1; count < faderCount + 1; count++) {
-      this.faders.push(new Fader(count));
+
+  get samples$() {
+    let faders$ =
+      range(0, this._faderCount).pipe(
+        map(id => new Fader(id,  Math.round(100 * Math.random()))),
+        toArray()
+      );
+
+    return interval(60000 / this._sampleRate)
+      .pipe(mergeMapTo(faders$));
+  }
+
+  subscribe(subscription: Subscription): Observable<FaderData> {
+    this.subscribed.push(subscription);
+    return this.needResubscribe$;
+  }
+
+  unsubscribe() {
+    for (let sub of this.subscribed) {
+      sub.unsubscribe();
     }
+    this.subscribed = [];
   }
 
-  start(sampleRate: number): Observable<Fader[]> {
-    this.stop();
-    this.timer = window.setInterval(() => {
-      for (let fader of this.faders) {
-        fader.value = Math.round(100 * Math.random());
-      }
-
-      this.subject.next(this.faders);
-    }, 60000 / sampleRate);
-
-    return this.subject;
+  resubscribe() {
+    this.unsubscribe();
+    this.needResubscribe$.next({count: this._faderCount, rate: this._sampleRate});
   }
-
-  stop() {
-    if (this.timer) {
-      clearInterval(this.timer);
-      this.timer = 0;
-    }
-  }
-
-  get faders$(): Observable<Fader[]> {
-    return this.subject;
-  }
-
 }

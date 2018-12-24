@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <div class="row no-gutters">
-      <div class="col-md-1 pads" *ngFor="let fader of faders$ | async">
+      <div class="col-md-1 pads" *ngFor="let fader of faders">
         <span class="text-nowrap">{{fader.caption}}</span>
         <div class="progress">
           <div class="progress-bar" [style.background-color]="fader.color" [style.width]="fader.value$"></div>
